@@ -3,7 +3,8 @@ import React from "react";
 
 function Loading() {
   return (
-    <Card className="w-[200px] space-y-5 p-4" radius="lg">
+    <div className="flex justify-center items-center">
+    <Card className="w-full h-screen space-y-5 p-4" radius="lg">
       <Skeleton className="rounded-lg">
         <div className="h-24 rounded-lg bg-default-300"></div>
       </Skeleton>
@@ -19,6 +20,7 @@ function Loading() {
         </Skeleton>
       </div>
     </Card>
+    </div>
   );
 }
 

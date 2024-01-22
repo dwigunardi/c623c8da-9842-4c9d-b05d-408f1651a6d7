@@ -1,10 +1,13 @@
-import HomePage from "./Home/page"
-import Login from "./Login/page"
+import MainLayout from "@/Layout/MainLayout";
+import HomePage from "../Component/Home/page";
+import Login from "./Login/page";
 
 export default function App() {
   return (
-    <main className="container bg-background">
-      <Login />
-    </main>
-  )
+    <MainLayout>
+      <main className="container-fluid md:container px-unit-20">
+        <HomePage />
+      </main>
+    </MainLayout>
+  );
 }

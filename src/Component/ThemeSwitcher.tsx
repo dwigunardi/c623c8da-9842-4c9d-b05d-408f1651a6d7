@@ -9,11 +9,18 @@ export function ThemeSwitcher() {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(true);
   const { theme, setTheme } = useTheme();
-  console.log(theme)
+ 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
       <Switch
-        isSelected={theme === "light" ? false : true}
+        isSelected={theme === "dark" ? true : false}
         onValueChange={() => setTheme(theme === "light" ? "dark" : "light")}
         defaultSelected
         size="lg"

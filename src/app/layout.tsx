@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../Provider/NextUiProvider";
 import { ThemeProviders } from "../Provider/NextThemeProvider";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,43 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <Providers>
-          <ThemeProviders>{children}</ThemeProviders>
+          <ThemeProviders>
+            <div className="hidden w-full h-full sm:flex">
+              <Image
+                alt="nextui logo"
+                src={"/bg-right.webp"}
+                width={1200}
+                height={1200}
+                objectFit="cover"
+                style={{
+                  zIndex: -100,
+                  position: "fixed",
+                  right: '-10%',
+                  top: '-20%',
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "end",
+                  transform: 'scaleX(-1)',
+                }}
+              />
+              <Image
+                alt="nextui logo"
+                src={"/bg-left.webp"}
+                width={1200}
+                height={1200}
+                objectFit="cover"
+                style={{
+                  zIndex: -100,
+                  position: "fixed",
+                  left: '-10%',
+                  bottom: '-20%',
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "end",
+                  transform: 'rotate(180deg)',
+                }}
+              />
+            </div>
+            {children}
+          </ThemeProviders>
         </Providers>
       </body>
     </html>
