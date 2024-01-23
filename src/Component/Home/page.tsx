@@ -16,13 +16,11 @@ import {
 import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import React from "react";
+import AddPost from "./AddPost";
+import { baseUrl } from "@/config/baseUrl";
 
-async function HomePage({
-  searchParams,
-}: {
-  searchParams?: { query: string; page: string };
-}) {
-  const res = await fetch("https://dummyjson.com/posts?limit=10", {
+async function GetPostAll() {
+  const res = await fetch(baseUrl + "/posts?limit=10", {
     cache: "no-cache",
     method: "GET",
     next: {
@@ -30,7 +28,14 @@ async function HomePage({
     },
   });
   const postData: PostApi = await res.json();
-  let isSearch = false;
+  return postData;
+}
+async function HomePage({
+  searchParams,
+}: {
+  searchParams?: { query: string; page: string };
+}) {
+  const postData: PostApi = await GetPostAll();
   const handleSearch = async (formData: FormData) => {
     "use server";
     const data = {
@@ -38,7 +43,7 @@ async function HomePage({
     };
 
     const res = await fetch(
-      "https://dummyjson.com/posts/search?q=" + data.search
+      baseUrl + `/posts/search?q=` + data.search
     );
     const postData: PostApi = await res.json();
     revalidateTag("posts");
@@ -46,10 +51,10 @@ async function HomePage({
 
   return (
     <div className="h-full w-full">
-      <Card className="w-full max-w-full h-full" isBlurred shadow="lg">
+      <Card className="max-w-full h-full bg-transparent" shadow="lg">
         <CardBody>
           <div className="p-10 mb-5">
-            <form
+            {/* <form
               action={handleSearch}
               className="w-full flex justify-center gap-3 items-center"
             >
@@ -86,18 +91,27 @@ async function HomePage({
                 }
               />
               <Button type="submit">Go...</Button>
-            </form>
+            </form> */}
+            <div className="flex flex-col gap-3">
+              <Button>Search</Button>
+              <AddPost />
+            </div>
           </div>
           <Divider className="mb-5" />
           <div className="mt-20 row">
             {postData.posts.map((post: PostData) => (
-              <div key={post.id} className="sm:col-6 mb-5">
-                <Card isHoverable isBlurred>
-                  <CardHeader className="block">
-                    <Link href={`/post/${post.id}`} className="w-full">
-                      <h1 className="text-xl font-bold text-primary mb-5">
-                        {post.title}
-                      </h1>
+              <div key={post.id} className="sm:col-6 mb-5 h-[200px]">
+                <Card
+                  shadow="none"
+                  className="border-2 bg-transparent h-full"
+                  isHoverable
+                >
+                  <CardHeader>
+                    <Link
+                      href={`/post/${post.id}`}
+                      className="w-full text-xl font-bold text-primary mb-5"
+                    >
+                      {post.title}
                     </Link>
                     {post.tags.map((tag: string) => (
                       <Chip key={tag} color="default" className="mr-2">
@@ -109,14 +123,19 @@ async function HomePage({
                     <p>{post.body.slice(0, 100)}...</p>
                   </CardBody>
                   <CardFooter className="w-full gap-3">
-                    <Link href={`/post/${post.id}`}>
-                      <Button color="secondary">Read More</Button>
-                    </Link>
+                    <Button color="secondary">
+                      <Link href={`/post/${post.id}`}>Read More</Link>
+                    </Button>
                     <Tooltip content={`Reactions: ${post.reactions}`}>
-                    <div className="relative h-10 w-10 bg-transparent rounded-full">
-                    <LoveIcon color="#be185d" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10" />
-                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-lg">{post.reactions}</span>
-                    </div>
+                      <div className="relative h-10 w-10 bg-transparent rounded-full">
+                        <LoveIcon
+                          color="#be185d"
+                          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10"
+                        />
+                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-lg">
+                          {post.reactions}
+                        </span>
+                      </div>
                     </Tooltip>
                   </CardFooter>
                 </Card>

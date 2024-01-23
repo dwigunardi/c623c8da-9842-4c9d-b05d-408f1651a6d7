@@ -47,7 +47,7 @@ export default function NavigationBar() {
           style={{ cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
-             <p className="font-bold text-xl">Submision App</p>
+          <p className="font-bold text-xl">Submision App</p>
         </NavbarBrand>
       </NavbarContent>
 

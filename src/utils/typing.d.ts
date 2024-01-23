@@ -81,3 +81,14 @@ export interface PostApi {
   skip: number;
   limit: number;
 }
+
+export interface CommentData {
+  id: number;
+  postId: number;
+  name: string;
+  body: string;
+  user: {
+    id: number;
+    username: string;
+  };
+}

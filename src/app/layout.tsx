@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "../Provider/NextUiProvider";
 import { ThemeProviders } from "../Provider/NextThemeProvider";
 import Image from "next/image";
+import MainLayout from "@/Layout/MainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,41 +23,50 @@ export default function RootLayout({
       <body>
         <Providers>
           <ThemeProviders>
+            <MainLayout>
             <div className="hidden w-full h-full sm:flex">
               <Image
                 alt="nextui logo"
                 src={"/bg-right.webp"}
-                width={1200}
-                height={1200}
-                objectFit="cover"
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="w-full h-auto"
+                priority
                 style={{
                   zIndex: -100,
                   position: "fixed",
-                  right: '-10%',
-                  top: '-20%',
+                  right: "-10%",
+                  top: "-20%",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "end",
-                  transform: 'scaleX(-1)',
+                  transform: "scaleX(-1)",
+                  width: "auto",
+                  height: "auto",
                 }}
               />
               <Image
                 alt="nextui logo"
                 src={"/bg-left.webp"}
-                width={1200}
-                height={1200}
-                objectFit="cover"
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="w-full h-auto"
                 style={{
                   zIndex: -100,
                   position: "fixed",
-                  left: '-10%',
-                  bottom: '-20%',
+                  left: "-10%",
+                  bottom: "-20%",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "end",
-                  transform: 'rotate(180deg)',
+                  transform: "rotate(180deg)",
+                  width: "auto",
+                  height: "auto",
                 }}
               />
             </div>
             {children}
+            </MainLayout>
           </ThemeProviders>
         </Providers>
       </body>

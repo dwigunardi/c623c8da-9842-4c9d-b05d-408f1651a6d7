@@ -6,8 +6,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className="">
       <NavigationBar />
-      {children}
-      
+      <div className="container-fluid md:container px-unit-20">{children}</div>
     </main>
   );
 }
