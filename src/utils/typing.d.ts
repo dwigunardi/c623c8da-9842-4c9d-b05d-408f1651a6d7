@@ -105,3 +105,13 @@ export interface CommentApi {
   skip: number;
   limit: number;
 }
+
+
+export interface PostStore {
+  initialPost: {
+    posts: PostData[];
+  };
+  isSearched: boolean;
+  replacePost: (data: any) => ReactNode | void;
+  resetPost: () => void
+}

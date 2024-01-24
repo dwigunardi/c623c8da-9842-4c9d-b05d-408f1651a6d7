@@ -1,7 +1,7 @@
 "use client";
 import { SearchIcon } from "@/Assets/Icon/SearchIcon";
 import { HandleSearch } from "@/ServerAction/handleSearch";
-import { PostApi } from "@/utils/typing";
+import { PostApi, PostData } from "@/utils/typing";
 import { Button, Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -19,7 +19,7 @@ function SubmitButton() {
       spinner={<SpinnerIcon />}
       color="primary"
     >
-      {pending ? "Posting..." : "Post"}
+      {pending ? "Searching..." : "Search"}
     </Button>
   );
 }
@@ -28,14 +28,14 @@ export const SearchForm = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { isSearched, addSearchedPost, setSearched } = usePostData(
-    (state) => state
-  );
+  const { replacePost } = usePostData((state) => state);
   const [value, setValue] = useState("");
   const [debouncedInputValue, setDebouncedInputValue] = useState("");
-  const [state, formAction] = useFormState(
+  const [dataForm, formAction] = useFormState(
     HandleSearch as (prev: PostApi, formData: FormData) => any,
-    null
+    {
+      post: [],
+    }
   );
   useEffect(() => {
     const delayInputTimeoutId = setTimeout(() => {
@@ -43,7 +43,6 @@ export const SearchForm = () => {
     }, 1000);
     return () => clearTimeout(delayInputTimeoutId);
   }, [value, 500]);
-
 
   function searchHandle(term: string) {
     const params = new URLSearchParams(searchParams);
@@ -57,7 +56,9 @@ export const SearchForm = () => {
 
   useEffect(() => {
     setValue(searchParams.get("query")?.toString() || "");
-  }, [searchParams]);
+    replacePost(dataForm);
+  }, [searchParams,dataForm]);
+
 
   return (
     <div className="p-10 mb-5">
@@ -71,7 +72,6 @@ export const SearchForm = () => {
           onChange={(e) => {
             setValue(e.target.value);
             searchHandle(e.target.value);
-            setSearched(true);
           }}
           name="search"
           label="Search Post"
@@ -110,6 +110,13 @@ export const SearchForm = () => {
         />
         <SubmitButton />
       </form>
+      <div className="pt-10">
+        {/* {dataForm?.post.map((post: PostData) => (
+          <div key={post.id}>
+            <h1>{post.title}</h1>
+            </div>
+        ))} */}
+      </div>
     </div>
   );
 };
