@@ -10,7 +10,7 @@ export const SectionPostDetail = ({
   return (
     <Card className="max-w-full h-full bg-transparent py-5 pl-5 p-4" shadow="lg">
       <CardHeader>
-        <h1 className="text-3xl font-bold text-left">{dataSource.title}</h1>
+        <h1 className="text-3xl font-bold text-left hover-underline-animation">{dataSource.title}</h1>
       </CardHeader>
       <div className="px-4 py-2">
       <div className="flex gap-3">
@@ -21,7 +21,7 @@ export const SectionPostDetail = ({
         </div>
       <CardBody>
         <div className="mb-5">
-          <p>{dataSource.body}</p>
+          <p className="hover-underline-animation">{dataSource.body}</p>
         </div>
       </CardBody>
     </Card>

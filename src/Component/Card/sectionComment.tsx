@@ -36,7 +36,7 @@ export const SectionComment = (props: {
               <User
                 name={comment?.user?.username}
                 description={
-                  <p className="text-lg font-bold dark:text-white">
+                  <p className="text-lg font-bold dark:text-white hover-underline-animation">
                     {comment.body}
                   </p>
                 }

@@ -43,11 +43,15 @@ export default function NavigationBar() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         /> */}
-        <NavbarBrand
-          style={{ cursor: "pointer" }}
-          onClick={() => router.push("/")}
-        >
-          <p className="font-bold text-xl">Submision App</p>
+        <NavbarBrand>
+          <div
+            className="flex items-center gap-2 w-fit cursor-pointer"
+            onClick={() => router.push("/")}
+          >
+            <p className="font-bold text-xl hover-underline-animation">
+              Submision App
+            </p>
+          </div>
         </NavbarBrand>
       </NavbarContent>
 
