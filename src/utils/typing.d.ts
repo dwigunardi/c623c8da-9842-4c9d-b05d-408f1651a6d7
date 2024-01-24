@@ -82,6 +82,12 @@ export interface PostApi {
   limit: number;
 }
 
+interface PostDataDetail {
+  title: string
+  body: string
+  tags: string[]
+}
+
 export interface CommentData {
   id: number;
   postId: number;

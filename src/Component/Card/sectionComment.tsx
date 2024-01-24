@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-export const UserComment = (props: {
+export const SectionComment = (props: {
   dataComment: { comments: any};
   handleForm: any;
 }) => {
@@ -30,13 +30,13 @@ export const UserComment = (props: {
         <CardHeader className="block">
           <h1 className="text-3xl font-bold text-left">Comment</h1>
         </CardHeader>
-        <div className="row max-h-screen overflow-y-auto mb-5 ml-2">
+        <div className="row gap-3 max-h-screen overflow-y-auto mb-5 ml-2">
           {state.map((comment: CommentData, idx: number) => (
-            <div key={idx} className="col-12 p-5">
+            <div key={idx} className="col-12">
               <User
                 name={comment?.user?.username}
                 description={
-                  <p className="text-lg dark:text-white text-black">
+                  <p className="text-lg font-bold dark:text-white">
                     {comment.body}
                   </p>
                 }
@@ -45,6 +45,7 @@ export const UserComment = (props: {
                   alt: "user image",
                   size: "lg",
                 }}
+                
               />
             </div>
           ))}
@@ -55,7 +56,7 @@ export const UserComment = (props: {
             <CardBody>
               <form
                 action={formAction}
-                className="w-full"
+                className="w-full flex flex-col gap-3"
                 onSubmit={(e) => setValue("")}
               >
                 <Input
@@ -77,7 +78,7 @@ export const UserComment = (props: {
                 />
                 <Button
                   type="submit"
-                  className="w-full mt-4 font-bold dark:text-black text-white"
+                  className="w-full font-bold dark:text-black text-white"
                   isLoading={pending}
                   spinner={<SpinnerIcon />}
                   color="primary"

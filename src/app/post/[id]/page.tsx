@@ -1,16 +1,7 @@
-import { SendIcon } from "@/Assets/Icon/SendIcond";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-  Input,
-  User,
-} from "@nextui-org/react";
 import React from "react";
-import { UserComment } from "../../../Component/CardComment/section";
+import { SectionComment } from "../../../Component/Card/sectionComment";
 import { getPostComment, getPostId } from "@/ServerAction/getPost";
+import { SectionPostDetail } from "@/Component/Card/SectionPostDetail";
 
 async function DetailPost({ params }: { params: { id: string } }) {
   const dataDetail = await getPostId(params.id);
@@ -40,27 +31,10 @@ async function DetailPost({ params }: { params: { id: string } }) {
   return (
     <div className="row">
       <div className="col-8">
-        <Card
-          className="max-w-full h-full bg-transparent py-5 pl-5"
-          shadow="lg"
-        >
-          <CardHeader className="block">
-            <h1 className="text-3xl font-bold text-left">{dataDetail.title}</h1>
-            {dataDetail.tags.map((tag: any) => (
-              <Chip key={tag} className="mr-3 mt-3">
-                {tag}
-              </Chip>
-            ))}
-          </CardHeader>
-          <CardBody>
-            <div className="mb-5">
-              <p>{dataDetail.body}</p>
-            </div>
-          </CardBody>
-        </Card>
+        <SectionPostDetail dataSource={dataDetail} />
       </div>
       <div className="col-4 max-h-[70vh]">
-        <UserComment dataComment={dataComment} handleForm={handleComment} />
+        <SectionComment dataComment={dataComment} handleForm={handleComment} />
       </div>
     </div>
   );
