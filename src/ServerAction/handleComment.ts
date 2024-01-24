@@ -1,10 +1,11 @@
 "use server";
-export const HandleComment = async (prev: any, formData: any, params: string) => {
+export const HandleComment = async (prev: [], formData: FormData) => {
     const data = {
-      body: formData,
-      postId: parseInt(params),
+      body: formData.get("comment"),
+      postId: formData.get("id"),
       userId: 1,
     };
+
     if (!data.body) return;
 
     const res = await fetch("https://dummyjson.com/comments/add", {

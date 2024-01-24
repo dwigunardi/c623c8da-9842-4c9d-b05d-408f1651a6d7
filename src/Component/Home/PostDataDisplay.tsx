@@ -1,13 +1,44 @@
+"use client";
 import { LoveIcon } from "@/Assets/Icon/LoveIcon";
+import { usePostData } from "@/Store";
 import { PostApi, PostData } from "@/utils/typing";
-import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Chip,
+  Tooltip,
+} from "@nextui-org/react";
 import Link from "next/link";
-import React from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
-export const PostDataDisplay = ({ postData }: { postData: PostApi }) => {
+export const PostDataDisplay = ({
+  postData,
+  query,
+  currentPage,
+}: {
+  postData: PostApi;
+  query?: string | undefined;
+  currentPage?: number | string;
+}) => {
+  if (!postData) return <div>Post Not Found</div>;
+  const { isSearched } = usePostData((state) => state);
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const searchParams = useSearchParams();
+  useEffect(() => {
+     if(searchParams.has("query")){
+       setLoading(true);
+     }else{
+       setLoading(false);
+     }
+  }, [searchParams]);
   return (
     <div className="mt-20 row">
-      {postData.posts.map((post: PostData) => (
+      {loading ? "Loading..." : postData.posts.map((post: PostData) => (
         <div key={post.id} className="sm:col-6 mb-5 h-[200px]">
           <Card
             shadow="none"

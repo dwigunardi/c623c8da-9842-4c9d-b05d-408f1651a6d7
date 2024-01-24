@@ -76,10 +76,10 @@ export interface PostData {
   reactions: number;
 }
 export interface PostApi {
-  posts: PostData[];
-  total: number;
-  skip: number;
-  limit: number;
+  limit?: number;
+  skip?: number;
+  total?: number;
+  posts?: PostData[];
 }
 
 interface PostDataDetail {
@@ -97,4 +97,11 @@ export interface CommentData {
     id: number;
     username: string;
   };
+}
+
+export interface CommentApi {
+  comments: CommentData[];
+  total: number;
+  skip: number;
+  limit: number;
 }
