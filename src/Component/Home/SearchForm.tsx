@@ -1,7 +1,7 @@
 "use client";
 import { SearchIcon } from "@/Assets/Icon/SearchIcon";
 import { Input } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebounce } from "../Hook";
 
@@ -22,7 +22,7 @@ export default function SearchForm() {
   }, 500);
 
   return (
-    <div className="p-10 mb-5">
+    <div className="p-10 ">
       <Input
         value={value}
         defaultValue={searchParams.get("query")?.toString()}

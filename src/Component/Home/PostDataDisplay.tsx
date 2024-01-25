@@ -1,6 +1,7 @@
 import { PostApi, PostData } from "@/utils/typing";
 import { PostCard } from "./PostCard";
 import { GetPostAll } from "@/ServerAction/getPost";
+import { Divider, Pagination } from "@nextui-org/react";
 
 export default async function PostDataDisplay({
   query,
@@ -11,15 +12,22 @@ export default async function PostDataDisplay({
 }) {
   const postData: PostApi = await GetPostAll(query || "");
   return (
-    <div className="mt-20 grid grid-cols-12 mx-auto">
+    <div className="row">
+      <div className="flex justify-center mb-3">
+        <Pagination
+          total={10}
+          initialPage={Number(currentPage)}
+          size="lg"
+          showControls
+          loop
+        />
+      </div>
+      <Divider className="mb-5" />
       {postData.posts.length === 0 ? (
-        <h1 className="text-center text-red-700">Not Found</h1>
+        <h1 className="text-center">Not Found</h1>
       ) : (
         postData.posts?.map((post: PostData, idx: number) => (
-          <div
-            key={idx}
-            className="md:col-span-6 mb-5 h-[200px]"
-          >
+          <div key={idx} className="md:col-6 mb-5 h-[250px]">
             <PostCard
               body={post.body}
               id={post.id}
