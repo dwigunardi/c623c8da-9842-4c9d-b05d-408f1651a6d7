@@ -22,7 +22,6 @@ export const HandleComment = async (prev: [], formData: FormData) => {
       });
       const dataRes = await res.json();
       // revalidateTag("comments");
-      console.log(result)
       return [...prev, dataRes];
     }
   } catch (error) {

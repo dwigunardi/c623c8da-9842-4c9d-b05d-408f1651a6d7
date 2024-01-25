@@ -1,17 +1,24 @@
-'use server'
+"use server";
 import { baseUrl } from "@/config/baseUrl";
 import { PostApi } from "@/utils/typing";
 
-export const GetPostAll = async () => {
-  const res = await fetch(baseUrl + "/posts?limit=10", {
-    cache: "no-cache",
-    method: "GET",
-    next: {
-      tags: ["posts"],
-    },
-  });
-  const data: PostApi = await res.json();
-  return data;
+export const GetPostAll = async (formData?: string) => {
+  try {
+    const res = await fetch(
+      baseUrl + `/posts/search?limit=10&q=` + formData,
+      {
+        cache: "no-cache",
+        method: "GET",
+        next: {
+          tags: ["posts"],
+        },
+      }
+    );
+    const data: PostApi = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getPostId = async (id: string) => {
