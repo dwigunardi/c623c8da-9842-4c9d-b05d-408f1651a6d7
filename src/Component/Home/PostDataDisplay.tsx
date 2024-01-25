@@ -1,5 +1,4 @@
 "use client";
-import { LoveIcon } from "@/Assets/Icon/LoveIcon";
 import { usePostData } from "@/Store";
 import { PostApi, PostData } from "@/utils/typing";
 import { useSearchParams } from "next/navigation";
@@ -16,21 +15,30 @@ export default function PostDataDisplay({
   query?: string | undefined;
   currentPage?: number | string;
 }) {
-  const { initialPost } = usePostData((state) => state);
+  const { initialPost, isSearched } = usePostData((state) => state);
   const [loading, setLoading] = React.useState(false);
   const searchParams = useSearchParams();
   useEffect(() => {
-    if (searchParams.has("query") && initialPost?.posts?.length === 0) {
+    if (searchParams.has("query") && isSearched) {
       setLoading(true);
     } else {
       setLoading(false);
     }
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
   }, [initialPost, searchParams]);
 
   return (
     <div className="mt-20 row">
       {loading ? (
         <LoadingRoute height={"screen"} width={"full"} />
+      ) : initialPost?.posts?.length == 0 && searchParams.has("query")   ? (
+        <div className="sm:col-6 mb-5 h-[200px]">
+          <h1 className="text-2xl">Not Found</h1>
+        </div>
       ) : initialPost?.posts?.length > 0 ? (
         initialPost.posts?.map((post: PostData) => (
           <div key={post.id} className="sm:col-6 mb-5 h-[200px]">

@@ -28,7 +28,7 @@ export default function SearchForm() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { replacePost } = usePostData((state) => state);
+  const { replacePost, setSearch} = usePostData((state) => state);
   const [value, setValue] = useState("");
   const [debouncedInputValue, setDebouncedInputValue] = useState("");
   const [dataForm, formAction] = useFormState(
@@ -41,6 +41,7 @@ export default function SearchForm() {
     const delayInputTimeoutId = setTimeout(() => {
       setDebouncedInputValue(value);
     }, 1000);
+    setSearch();
     return () => clearTimeout(delayInputTimeoutId);
   }, [value, 500]);
 
@@ -110,13 +111,6 @@ export default function SearchForm() {
         />
         <SubmitButton />
       </form>
-      <div className="pt-10">
-        {/* {dataForm?.post.map((post: PostData) => (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            </div>
-        ))} */}
-      </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ export const usePostData = create<PostStore>((set) => ({
     posts: [],
   },
   isSearched: false,
+  setSearch: () => set((state) => ({ isSearched: true })),
   replacePost: (data) => set((state) => ({ initialPost: data, isSearched: true })),
   resetPost: () => set((state) => ({ initialPost: { posts: [] }, isSearched: false })),
 }));

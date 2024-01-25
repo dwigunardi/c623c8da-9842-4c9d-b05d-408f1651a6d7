@@ -112,6 +112,7 @@ export interface PostStore {
     posts: PostData[];
   };
   isSearched: boolean;
+  setSearch: () => void
   replacePost: (data: any) => ReactNode | void;
   resetPost: () => void
 }

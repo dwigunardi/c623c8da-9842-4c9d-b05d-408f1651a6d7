@@ -19,9 +19,7 @@ async function HomePage({
     <div className="h-full w-full">
       <Card className="max-w-full h-full bg-transparent" shadow="lg">
         <CardBody>
-          <Suspense key={query + currentPage} fallback={<Loading />}>
             <SearchForm />
-          </Suspense>
           <Divider className="mb-5" />
           <Suspense key={query + currentPage} fallback={<Loading />}>
             <PostDataDisplay
