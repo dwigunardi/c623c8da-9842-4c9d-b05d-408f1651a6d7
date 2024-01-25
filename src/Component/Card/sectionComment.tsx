@@ -50,7 +50,7 @@ export const SectionComment = ({
   dataComment: CommentApi;
   postId: number | string;
 }) => {
-  const [value, setValue] = useState("");
+
   const [state, formAction] = useFormState(
     HandleComment as (prev: ReactNode, formData: FormData) => Promise<any[]>,
     dataComment.comments || []

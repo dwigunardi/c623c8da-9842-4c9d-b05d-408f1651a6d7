@@ -7,7 +7,7 @@ const userSchema = z.object({
 });
 
 export const commentSchema = z.object({
-  body: z.string(),
-  postId: z.number(),
+  body: z.string().min(5).max(20),
+  postId: z.string().min(1),
   userId: z.number(),
 });
