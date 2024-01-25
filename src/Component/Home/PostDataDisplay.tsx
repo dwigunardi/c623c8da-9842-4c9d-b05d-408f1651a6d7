@@ -2,7 +2,7 @@
 import { LoveIcon } from "@/Assets/Icon/LoveIcon";
 import { usePostData } from "@/Store";
 import { PostApi, PostData } from "@/utils/typing";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { PostCard } from "./PostCard";
 import LoadingRoute from "../LoadingRoute";
@@ -17,7 +17,6 @@ export default function PostDataDisplay({
   currentPage?: number | string;
 }) {
   const { initialPost } = usePostData((state) => state);
-  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
   const searchParams = useSearchParams();
   useEffect(() => {
