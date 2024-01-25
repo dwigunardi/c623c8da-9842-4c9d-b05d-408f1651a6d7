@@ -38,7 +38,6 @@ export const PostDataDisplay = ({
     }
   }, [initialPost, searchParams]);
 
-  if (!postData) return <div>Post Not Found</div>;
   return (
     <div className="mt-20 row">
       {loading ? (
