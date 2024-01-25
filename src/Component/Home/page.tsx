@@ -1,14 +1,9 @@
-import { LoveIcon } from "@/Assets/Icon/LoveIcon";
-import { SearchIcon } from "@/Assets/Icon/SearchIcon";
-import { PostApi, PostData } from "@/utils/typing";
-import { Button, Card, CardBody, Divider, Input } from "@nextui-org/react";
-import { revalidateTag } from "next/cache";
+import { PostApi } from "@/utils/typing";
+import { Card, CardBody, Divider } from "@nextui-org/react";
 import React, { Suspense } from "react";
-import AddPost from "./AddPost";
-import { baseUrl } from "@/config/baseUrl";
 import { GetPostAll } from "@/ServerAction/getPost";
-import { PostDataDisplay } from "./PostDataDisplay";
-import { SearchForm } from "./SearchForm";
+import PostDataDisplay from "./PostDataDisplay";
+import SearchForm from "./SearchForm";
 import Loading from "./loading";
 
 async function HomePage({
@@ -17,7 +12,7 @@ async function HomePage({
   searchParams?: { query?: string; page?: string };
 }) {
   const postData: PostApi = await GetPostAll();
-  
+
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   return (
@@ -26,10 +21,7 @@ async function HomePage({
         <CardBody>
           <SearchForm />
           <Divider className="mb-5" />
-          <Suspense
-            key={query + currentPage}
-            fallback={<Loading  />}
-          >
+          <Suspense key={query + currentPage} fallback={<Loading />}>
             <PostDataDisplay
               postData={postData}
               query={query}

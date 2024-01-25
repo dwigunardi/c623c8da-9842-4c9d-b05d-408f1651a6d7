@@ -24,7 +24,7 @@ function SubmitButton() {
   );
 }
 
-export const SearchForm = () => {
+export default function SearchForm() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();

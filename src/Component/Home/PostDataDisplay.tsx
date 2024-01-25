@@ -2,22 +2,12 @@
 import { LoveIcon } from "@/Assets/Icon/LoveIcon";
 import { usePostData } from "@/Store";
 import { PostApi, PostData } from "@/utils/typing";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-  Tooltip,
-} from "@nextui-org/react";
-import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { PostCard } from "./PostCard";
 import LoadingRoute from "../LoadingRoute";
 
-export const PostDataDisplay = ({
+export default function PostDataDisplay({
   postData,
   query,
   currentPage,
@@ -25,7 +15,7 @@ export const PostDataDisplay = ({
   postData: PostApi;
   query?: string | undefined;
   currentPage?: number | string;
-}) => {
+}) {
   const { initialPost } = usePostData((state) => state);
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
@@ -71,4 +61,4 @@ export const PostDataDisplay = ({
       )}
     </div>
   );
-};
+}
