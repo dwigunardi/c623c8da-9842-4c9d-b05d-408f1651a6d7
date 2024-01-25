@@ -1,6 +1,4 @@
-import MainLayout from "@/Layout/MainLayout";
-import HomePage from "../Component/Home/page";
-import Login from "./Login/page";
+import HomePage from "../Component/Home";
 
 export default function App() {
   return (
