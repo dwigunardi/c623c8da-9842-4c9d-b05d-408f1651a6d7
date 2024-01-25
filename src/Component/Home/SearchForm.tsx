@@ -8,6 +8,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { SpinnerIcon } from "@/Assets/Icon/SpinnerIcon";
 import { usePostData } from "@/Store";
+import { useDebounce } from "../Hook";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -30,20 +31,20 @@ export default function SearchForm() {
   const { replace } = useRouter();
   const { replacePost, setSearch} = usePostData((state) => state);
   const [value, setValue] = useState("");
-  const [debouncedInputValue, setDebouncedInputValue] = useState("");
+
   const [dataForm, formAction] = useFormState(
     HandleSearch as (prev: PostApi, formData: FormData) => any,
     {
       post: [],
     }
   );
-  useEffect(() => {
-    const delayInputTimeoutId = setTimeout(() => {
-      setDebouncedInputValue(value);
-    }, 1000);
-    setSearch();
-    return () => clearTimeout(delayInputTimeoutId);
-  }, [value, 500]);
+
+  const handleDebounce = useDebounce((term: string) => {
+    // Perform search operation with the debounced term
+    console.log('Searching for:', term);
+    searchHandle(term);
+  }, 500);
+
 
   function searchHandle(term: string) {
     const params = new URLSearchParams(searchParams);
@@ -53,26 +54,33 @@ export default function SearchForm() {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
+    setValue(term)
+    const formData = new FormData();
+    formData.append("search", term);
+    // console.log(formData)
+    formAction(formData);
   }
 
   useEffect(() => {
+    setSearch();
     setValue(searchParams.get("query")?.toString() || "");
     replacePost(dataForm);
-  }, [searchParams,dataForm]);
+  }, [searchParams]);
 
 
   return (
     <div className="p-10 mb-5">
-      <form
+      {/* <form
         action={formAction}
         className="w-full flex justify-center gap-3 items-center"
-      >
+      > */}
         <Input
           value={value}
           defaultValue={searchParams.get("query")?.toString()}
           onChange={(e) => {
             setValue(e.target.value);
-            searchHandle(e.target.value);
+            // searchHandle(e.target.value);
+            handleDebounce(e.target.value);
           }}
           name="search"
           label="Search Post"
@@ -109,8 +117,8 @@ export default function SearchForm() {
             <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
           }
         />
-        <SubmitButton />
-      </form>
+        {/* <SubmitButton /> */}
+      {/* </form> */}
     </div>
   );
 };
