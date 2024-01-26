@@ -2,10 +2,10 @@
 import { baseUrl } from "@/config/baseUrl";
 import { PostApi } from "@/utils/typing";
 
-export const GetPostAll = async (formData?: string) => {
+export const GetPostAll = async (formData?: string, paginate?: number | string) => {
   try {
     const res = await fetch(
-      baseUrl + `/posts/search?limit=10&q=` + formData,
+      baseUrl + `/posts/search?limit=10&q=` + formData + `&skip=` + '0',
       {
         cache: "no-cache",
         method: "GET",

@@ -21,12 +21,16 @@ export const HandleComment = async (prev: [], formData: FormData) => {
         },
       });
       const dataRes = await res.json();
-      // revalidateTag("comments");
+      // revalidateTag("commen
       return [...prev, dataRes];
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
       return error.issues;
     }
+    // return {
+    //   message: 'something went wrong',
+    //   error: error.
+    // }
   }
 };

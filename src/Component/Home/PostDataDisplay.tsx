@@ -15,7 +15,7 @@ export default async function PostDataDisplay({
     <div className="row">
       <div className="flex justify-center mb-3">
         <Pagination
-          total={10}
+          total={postData.total / 10 <= 1 ? 1 : postData.total / 10}
           initialPage={Number(currentPage)}
           size="lg"
           showControls
