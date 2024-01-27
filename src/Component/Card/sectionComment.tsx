@@ -1,4 +1,7 @@
 "use client";
+import { AvatarIcon } from "@/Assets/Icon/AvatarIcon";
+import { ErrorIcon } from "@/Assets/Icon/ErrorIcon";
+import { NotFound } from "@/Assets/Icon/NotFound";
 import { SendIcon } from "@/Assets/Icon/SendIcond";
 import { SpinnerIcon } from "@/Assets/Icon/SpinnerIcon";
 import { HandleComment } from "@/ServerAction/handleComment";
@@ -13,10 +16,7 @@ import {
 } from "@nextui-org/react";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import {
-  Controller,
-  useForm,
-} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 function SubmitButton(props: any) {
   const { disabled } = props;
@@ -48,7 +48,6 @@ export const SectionComment = ({
   dataComment: CommentApi;
   postId: number | string;
 }) => {
-
   const [state, formAction] = useFormState(
     HandleComment as (prev: ReactNode, formData: FormData) => Promise<any[]>,
     dataComment.comments || []
@@ -73,23 +72,34 @@ export const SectionComment = ({
           <h1 className="text-3xl font-bold text-left">Comment</h1>
         </CardHeader>
         <div className="row gap-3 max-h-screen overflow-y-auto mb-5 ml-2">
-          {state?.map((comment: CommentData, idx: number) => (
-            <div key={idx} className="col-12">
-              <User
-                name={comment?.user?.username}
-                description={
-                  <p className="text-lg font-bold dark:text-white hover-underline-animation">
-                    {comment.body}
-                  </p>
-                }
-                avatarProps={{
-                  src: `https://i.pravatar.cc/150?img=${comment?.user?.id}`,
-                  alt: "user image",
-                  size: "lg",
-                }}
-              />
-            </div>
-          ))}
+          {state?.map((comment: CommentData, idx: number) => {
+            if (comment.message) {
+              return (
+                <div key={idx} className="flex flex-col justify-center items-center">
+                  <ErrorIcon width={"7rem"} height={"7rem"} color="primary" />
+                  <p className="text-3xl font-bold text-center">Something went wrong</p>
+                </div>
+              );
+            }
+            return (
+              <div key={idx} className="col-12">
+                <User
+                  name={comment?.user?.username}
+                  description={
+                    <p className="text-lg font-bold dark:text-white hover-underline-animation">
+                      {comment.body}
+                    </p>
+                  }
+                  avatarProps={{
+                    src: `https://i.pravatar.cc/150?img=${comment?.user?.id}`,
+                    alt: "user image",
+                    size: "lg",
+                    fallback: "https://avatar.iran.liara.run/public",
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div className="h-[15%] w-full flex justify-items-end items-end">

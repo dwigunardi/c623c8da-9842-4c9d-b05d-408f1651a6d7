@@ -68,42 +68,51 @@ export interface UserData {
 }
 
 export interface PostData {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-  tags: string[];
-  reactions: number;
+  id?: number;
+  title?: string;
+  body?: string;
+  userId?: number;
+  tags?: string[];
+  reactions?: number;
+  message?: string
 }
 export interface PostApi {
   limit?: number;
   skip?: number;
   total?: number;
   posts?: PostData[];
-}
-
-interface PostDataDetail {
-  title: string
-  body: string
-  tags: string[]
+  message?: string;
 }
 
 export interface CommentData {
-  id: number;
-  postId: number;
-  name: string;
-  body: string;
-  user: {
-    id: number;
-    username: string;
+  id?: number;
+  postId?: number | string;
+  name?: string;
+  body?: string;
+  user?: {
+    id?: number;
+    username?: string;
   };
+  message?: string
 }
 
 export interface CommentApi {
-  comments: CommentData[];
-  total: number;
-  skip: number;
-  limit: number;
+  comments?: CommentData[];
+  total?: number;
+  skip?: number;
+  limit?: number;
+  message?: string
+}
+
+export interface commentPost {
+  id: number;
+  body: string;
+  postId: string;
+  user: {
+    id: number;
+    username: string;
+  }
+  message?: string
 }
 
 

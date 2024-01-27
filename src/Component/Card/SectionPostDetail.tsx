@@ -1,11 +1,11 @@
-import { PostDataDetail } from "@/utils/typing";
+import { PostData } from "@/utils/typing";
 import { Card, CardBody, CardHeader, Chip } from "@nextui-org/react";
 import React from "react";
 
 export const SectionPostDetail = ({
   dataSource,
 }: {
-  dataSource: PostDataDetail;
+  dataSource: PostData;
 }) => {
   return (
     <Card className="max-w-full h-full bg-transparent py-5 pl-5 p-4" shadow="lg">
