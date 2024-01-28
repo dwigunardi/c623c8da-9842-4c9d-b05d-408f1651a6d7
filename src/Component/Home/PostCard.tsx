@@ -20,8 +20,8 @@ export const PostCard = ({ body, id, title, tags, reactions }: PostData) => {
         className="border-2 bg-transparent h-full"
         isHoverable
       >
-        <CardHeader className="w-full text-xl font-bold text-primary">
-            {title}
+        <CardHeader className="w-full">
+            <h1 className="text-xl font-bold text-primary">{title}</h1>
         </CardHeader>
         <CardBody>
           <p>{body.slice(0, 100)}...</p>
