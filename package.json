@@ -1,7 +1,6 @@
 {
-  "name": "test-ambisius",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@dwigunardi/next-14-cypress-zod",
+  "version": "1.1.5",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +13,7 @@
     "@nextui-org/react": "^2.2.9",
     "framer-motion": "^10.18.0",
     "next": "14.1.0",
+    "next-14-cypress-zod": "^1.1.4",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
@@ -34,5 +34,24 @@
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwigunardi/next-14-cypress-zod.git"
+  },
+  "keywords": [
+    "next",
+    "with",
+    "cypress",
+    "and",
+    "zod"
+  ],
+  "author": "dwigunardi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwigunardi/next-14-cypress-zod/issues"
+  },
+  "homepage": "https://github.com/dwigunardi/next-14-cypress-zod#readme"
 }
