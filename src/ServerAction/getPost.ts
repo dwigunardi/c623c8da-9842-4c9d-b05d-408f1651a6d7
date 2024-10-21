@@ -20,7 +20,7 @@ export const GetPostAll = async (
       }
     );
     const data: PostApi = await res.json();
-
+    
     return postSchema.parse(data);
   } catch (error) {
     if (error instanceof ZodError) {

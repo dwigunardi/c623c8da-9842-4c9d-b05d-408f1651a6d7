@@ -1,3 +1,4 @@
+import { DislikesIcon } from "@/Assets/Icon/DislikeIcon";
 import { LoveIcon } from "@/Assets/Icon/LoveIcon";
 import { PostData } from "@/utils/typing";
 import {
@@ -32,14 +33,25 @@ export const PostCard = ({ body, id, title, tags, reactions }: PostData) => {
               {tag}
             </Chip>
           ))}
-          <Tooltip content={`Reactions: ${reactions}`}>
+          <Tooltip content={`Reactions: ${reactions.likes}`}>
             <div className="relative h-10 w-10 bg-transparent rounded-full">
               <LoveIcon
                 color="#be185d"
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-12 w-12"
               />
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-lg">
-                {reactions}
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-small">
+                {reactions.likes}
+              </span>
+            </div>
+          </Tooltip>
+          <Tooltip content={`Dislikes: ${reactions.dislikes}`}>
+            <div className="relative h-10 w-10 bg-transparent rounded-full">
+              <DislikesIcon
+                color="#be185d"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-12 w-12"
+              />
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-small">
+                {reactions.dislikes}
               </span>
             </div>
           </Tooltip>

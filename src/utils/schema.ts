@@ -12,7 +12,10 @@ export const postDetailSchema = z.object({
   body: z.string(),
   userId: z.number(),
   tags: z.array(z.string()),
-  reactions: z.number(),
+  reactions: z.object({
+    likes: z.number(),
+    dislikes: z.number(),
+  }),
 });
 
 export const commentSchema = z.object({
@@ -48,7 +51,10 @@ const postDataSchema = z.object({
   body: z.string(),
   userId: z.number(),
   tags: z.array(z.string()),
-  reactions: z.number(),
+  reactions: z.object({
+    likes: z.number(),
+    dislikes: z.number(),
+  }),
 });
 
 

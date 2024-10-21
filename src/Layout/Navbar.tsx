@@ -37,6 +37,7 @@ export default function NavigationBar() {
       isBordered
       isBlurred
       className="mb-5"
+      id="navbar"
     >
       <NavbarContent justify="start">
         {/* <NavbarMenuToggle

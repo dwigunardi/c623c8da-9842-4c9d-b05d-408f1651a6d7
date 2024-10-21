@@ -31,6 +31,7 @@ export function ThemeSwitcher() {
             <MoonIcon className={className} />
           )
         }
+        id="theme-switcher"
       >
       </Switch>
   );

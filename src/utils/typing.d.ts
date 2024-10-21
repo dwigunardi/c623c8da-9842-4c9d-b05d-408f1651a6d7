@@ -73,7 +73,10 @@ export interface PostData {
   body?: string;
   userId?: number;
   tags?: string[];
-  reactions?: number;
+  reactions?: {
+    likes?: number;
+    dislikes?: number;
+  };
   message?: string
 }
 export interface PostApi {
