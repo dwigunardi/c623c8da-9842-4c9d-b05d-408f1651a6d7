@@ -15,7 +15,10 @@ const mockPostData: PostApi = {
       body: "body",
       userId: 1,
       tags: ["tag"],
-      reactions: 0,
+      reactions: {
+        likes: 0,
+        dislikes: 0,
+      },
     },
   ],
 };
